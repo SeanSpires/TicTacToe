@@ -1,0 +1,6 @@
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/bin/Debug/TicTacToeApplication.exe
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/bin/Debug/TicTacToeApplication.pdb
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/obj/Debug/TicTacToeApplication.csprojAssemblyReference.cache
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/obj/Debug/TicTacToeApplication.csproj.CoreCompileInputs.cache
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/obj/Debug/TicTacToeApplication.exe
+/Users/sean.spires/Desktop/Projects/TicTacToe/TicTacToeApplication/TicTacToeApplication/obj/Debug/TicTacToeApplication.pdb

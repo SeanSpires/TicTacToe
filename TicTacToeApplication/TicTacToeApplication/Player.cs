@@ -26,6 +26,12 @@ namespace TicTacToeApplication
         public int getPlayerNumber()
         {
             return this.playerNumber;
+            
+        }
+
+        public string getPlayerSymbol()
+        {
+            return this.symbol;
         }
     }
 }
