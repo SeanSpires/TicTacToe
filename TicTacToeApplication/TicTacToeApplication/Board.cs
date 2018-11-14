@@ -39,11 +39,11 @@ namespace TicTacToeApplication
 
 
             //check if a row has a winning condition 
-            for (int i = 0; i <= 2; i++)
+            for (int i = 0; i < board.GetLength(0); i++)
             {
                 sum = 0;
                 
-                for (int j = 0; j <= 2; j++)
+                for (int j = 0; j <  board.GetLength(1); j++)
                 {
                     sum = sum + gameValues[board[i,j]];
                 }
@@ -64,11 +64,11 @@ namespace TicTacToeApplication
     
             //check if a col has a winning condition
             
-            for (int j = 0; j <= 2; j++)
+            for (int j = 0; j < board.GetLength(1); j++)
             {
                 sum = 0;
                 
-                for (int i = 0; i <= 2; i++)
+                for (int i = 0; i <  board.GetLength(0); i++)
                 {
                     sum = sum + gameValues[board[j, i]];
                 }
@@ -92,7 +92,7 @@ namespace TicTacToeApplication
                 
                 for (int j = i; j < board.GetLength(1); j++)
                 {
-                    sum = sum + gameValues[board[i, j]];
+                    sum = sum + gameValues[board[i,j]];
                 }
 
                 if (sum == board.GetLength(0))
@@ -116,19 +116,24 @@ namespace TicTacToeApplication
                 {
                    sum = sum + gameValues[board[i, j]];
                 }
-
-                if (sum == board.GetLength(0))
-                {
-                    return "X";
-                }
-
-                if (sum == -board.GetLength(1))
-                {
-                    return "O";
-                }
+                
             }
 
-            return "empty";
+            if (sum == board.GetLength(0))
+            {
+                return "X";
+            }    
+
+            if (sum == -board.GetLength(1))
+            {
+                return "O";
+            }
+            else
+            {
+                return "empty";   
+            }
+
+            
 
         }
 
