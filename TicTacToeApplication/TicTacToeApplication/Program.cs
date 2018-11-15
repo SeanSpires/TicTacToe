@@ -7,18 +7,10 @@ namespace TicTacToeApplication
     {
         public static void Main(string[] args)
         {
-            while (true)
-            {
-                Console.WriteLine("How many players will be playing? ");
-                var userInput = Console.ReadLine();
-
-                try
-                {
-                    var numberOfPlayers = int.Parse(userInput);
-                }
-                //catch()
-
-            }
+            Console.WriteLine("How many players will be playing? ");
+            var userInput = Console.ReadLine();
+            Game game = new Game(int.Parse(userInput));
+            game.start();
         }
     }
 }

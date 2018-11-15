@@ -24,7 +24,6 @@ namespace TicTacToeApplication
 
             while (true)
             {
-                Console.WriteLine(" ");
                 Console.WriteLine("Its your turn player " + players[playerPlaying].getPlayerNumber() + ".");
                 Console.WriteLine("Your symbol is " + players[playerPlaying].getPlayerSymbol());
 
@@ -36,20 +35,21 @@ namespace TicTacToeApplication
                     if (checkForValidMove(userPlay))
                     {
                         var coordinates = userPlay.Split(' ').Select(int.Parse).ToList();
+                        Console.WriteLine("Move accepted, here's the current board:");
                         board.updateBoard(coordinates[0], coordinates[1], players[playerPlaying].getPlayerSymbol());
                         board.displayBoard();
                         var gameWon = board.checkForWin();
 
                         if (gameWon == "X")
                         {
-                            Console.WriteLine(" ");
+                            //Console.WriteLine(" ");
                             Console.WriteLine("Player 0 has won the game");
                             return;
                         }
 
                         if (gameWon == "O")
                         {
-                            Console.WriteLine(" ");
+                            //Console.WriteLine(" ");
                             Console.WriteLine("Player 1 has won the game");
                             return;
                         }
@@ -100,7 +100,7 @@ namespace TicTacToeApplication
                     return false;
                 }
 
-                else if (board.getBoardElement(coordinates[0], coordinates[1]).Trim() != "empty")
+                else if (board.getBoardElement(coordinates[0], coordinates[1]).Trim() != ".")
                 {
                     Console.WriteLine("Those coordinates have already been selected");
                     return false;
