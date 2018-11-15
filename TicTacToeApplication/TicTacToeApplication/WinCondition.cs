@@ -4,15 +4,11 @@ namespace TicTacToeApplication
 {
     public class WinCondition
     {
-        private Player player;
-        private Board board;
-        private string[,] playField;
-        private int targetSum;
+        private readonly string[,] playField;
+        private readonly int targetSum;
 
         public WinCondition(Player player, Board board)
         {
-            this.player = player;
-            this.board = board;
             playField = board.getPlayField();
             targetSum = Game.calculateGameValues(player.getPlayerSymbol()) * Math.Min(playField.GetLength(0),
                             playField.GetLength(1));
@@ -20,17 +16,18 @@ namespace TicTacToeApplication
 
         public bool hasPlayerWon()
         {
-            return checkRowForWin() || checkColForWin() || checkDiagonalForWin() || checkAntiDiagForWin();
+            return checkRowForWin() || checkColForWin() || checkDiagonalForWin() || checkAntiDiagForWin() ||
+                   isBoardFull();
         }
 
         public bool checkRowForWin()
         {
-            for (var i = 0; i < playField.GetLength(0); i++)
+            for (var row = 0; row < Board.getBoardWidth(); row++)
             {
                 var sum = 0;
-                for (int j = 0; j < playField.GetLength(1); j++)
+                for (var col = 0; col < Board.getBoardHeight(); col++)
                 {
-                    sum += Game.calculateGameValues(playField[i, j]);
+                    sum += Game.calculateGameValues(playField[row, col]);
                 }
 
                 if (sum == targetSum)
@@ -44,12 +41,12 @@ namespace TicTacToeApplication
 
         public bool checkColForWin()
         {      
-            for (int j = 0; j < playField.GetLength(1); j++)
+            for (int col = 0; col < playField.GetLength(1); col++)
             {
                 var sum = 0;
                 for (int i = 0; i < playField.GetLength(0); i++)
                 {
-                    sum += sum + Game.calculateGameValues(playField[j, i]);                  
+                    sum += sum + Game.calculateGameValues(playField[col, i]);                  
                 }
 
                 if (sum == targetSum)
@@ -64,9 +61,9 @@ namespace TicTacToeApplication
         public bool checkDiagonalForWin()
         {
             var sum = 0;
-            for (int i = 0; i < Math.Min(playField.GetLength(0),playField.GetLength(1)); i++)
+            for (int index = 0; index < Math.Min(Board.getBoardWidth(),Board.getBoardHeight()); index++)
             {
-                sum += Game.calculateGameValues(playField[i, i]);
+                sum += Game.calculateGameValues(playField[index, index]);
             }
 
             return sum == targetSum;
@@ -75,9 +72,9 @@ namespace TicTacToeApplication
         public bool checkAntiDiagForWin()
         {
             var sum = 0;
-            for (int i = 0; i < Math.Min(playField.GetLength(0),playField.GetLength(1)); i++)
+            for (int index = 0; index < Math.Min(Board.getBoardWidth(),Board.getBoardHeight()); index++)
             {
-                sum += Game.calculateGameValues(playField[playField.GetLength(0) - 1 -i,i]);
+                sum += Game.calculateGameValues(playField[Board.getBoardWidth() - 1 -index,index]);
             }
 
             return sum == targetSum;    
@@ -85,17 +82,40 @@ namespace TicTacToeApplication
 
         public bool isBoardFull()
         {
-            for (int i = 0; i < playField.GetLength(0); i++)
+            for (int i = 0; i < Board.getBoardWidth(); i++)
             {
-                for (int j = 0; j < playField.GetLength(1); j++)
+                for (int j = 0; j < Board.getBoardHeight(); j++)
                 {
-                    if (playField[i, j].Equals("."))
+                    if (playField[i, j].Equals(Board.getEmptySymbol()))
                     {
                         return false;
                     }
                 }
             }
             return true;
+        }
+
+        public bool checkRowOrColForWin(int rows, int columns)
+        {   
+            for (int row = 0; row < rows; rows++)
+            {
+                var sum = 0;
+                
+                for (int col = 0; col < columns; columns++)
+                {
+                    sum += sum + Game.calculateGameValues(playField[row,col]);                  
+                }
+
+                if (sum == targetSum)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+            
+            
+            
         }
     }
 }

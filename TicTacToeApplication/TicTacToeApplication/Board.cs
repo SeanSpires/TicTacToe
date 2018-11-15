@@ -5,29 +5,25 @@ namespace TicTacToeApplication
 {
     public class Board
     {
-        private readonly int BOARD_WIDTH = 3;
-        private readonly int BOARD_HEIGHT = 3;
-
-        
+        private static int BOARD_WIDTH;
+        private static int BOARD_HEIGHT;
+        private const string EMPTY_SYMBOL = ".";
         private readonly string[,] playField;
         
-        
-        public Board()
+        public Board(int size)
         {
-            playField = new string[BOARD_WIDTH,BOARD_HEIGHT];
-            setUpBoard();
-        }
+           BOARD_WIDTH = size;
+           BOARD_HEIGHT = size;
+           playField = new string[BOARD_WIDTH ,BOARD_HEIGHT];
+           setUpBoard();
 
-        public Board(int width, int height)
-        {
-            
         }
 
         public void setUpBoard()
         {
-            for (int row = 1; row <= 3; row++)
+            for (int row = 1; row <= BOARD_WIDTH; row++)
             {
-                for (int col = 1; col <= 3; col++)
+                for (int col = 1; col <= BOARD_HEIGHT; col++)
                 {
                     updateBoard(row, col, ".");
                 }
@@ -35,36 +31,16 @@ namespace TicTacToeApplication
            
         }
 
-        public void updateBoard(int i,int j,string symbol)
+        public void updateBoard(int row,int col,string symbol)
         {
-            playField[i - 1, j - 1] = symbol;
+            playField[row - 1, col - 1] = symbol;
         }
 
-        public void displayBoard()
-        {
-            for (var i = 0; i < playField.GetLength(0); i++)
-            {
-                Console.Write("\n");
-                for (var j = 0; j < playField.GetLength(1); j++)
-                {
-                    
-                    if (playField[i,j] == ".")
-                    {
-                        Console.Write(". ");
-                    }
-                    else
-                    {
-                      Console.Write(playField[i,j] + " ");  
-                    }
 
-                }
-            }
-            Console.Write("\n");
-        }
 
-        public string getBoardElement(int i, int j)
+        public string getBoardElement(int row, int col)
         {
-            return this.playField[i,j];
+            return this.playField[row,col];
         }
 
         public string[,] getPlayField()
@@ -72,7 +48,20 @@ namespace TicTacToeApplication
             return playField;
         }
 
-        
+        public static int getBoardHeight()
+        {
+            return BOARD_HEIGHT;
+        }
+
+        public static int getBoardWidth()
+        {
+            return BOARD_WIDTH;
+        }
+
+        public static string getEmptySymbol()
+        {
+            return EMPTY_SYMBOL;
+        }
 
     }
 

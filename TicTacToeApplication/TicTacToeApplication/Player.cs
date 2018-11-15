@@ -17,7 +17,6 @@ namespace TicTacToeApplication
             this.symbol = playerNumber % 2 == 0 ? "X" : "O";
         }
 
-
         public int getPlayerNumber()
         {
             return this.playerNumber;
