@@ -6,7 +6,6 @@ namespace TicTacToeApplication
     {
         private string symbol;
         private int playerNumber;
-        private bool isPlayerTurn;
 
         public void setPlayerNumber(int playerNumber)
         {
@@ -18,10 +17,6 @@ namespace TicTacToeApplication
             this.symbol = playerNumber % 2 == 0 ? "X" : "O";
         }
 
-        public void setPlayerTurn()
-        {
-            isPlayerTurn = isPlayerTurn == false;
-        }
 
         public int getPlayerNumber()
         {

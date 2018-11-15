@@ -9,24 +9,25 @@ namespace TicTacToeApplication
 {
     public class Game
     {
-        private Board board = new Board();
+        private static Board board = new Board();
         private List<Player> players = new List<Player>();
+        private static Dictionary<string,int>  gameValues = new Dictionary<string, int> {{"X", 1}, {"O", -1}, {".", 0}};
+        private int playerPlaying = 0;
 
         public Game(int numberOfPlayers)
         {
-            setPlayers(numberOfPlayers);
+            initalizePlayers(numberOfPlayers);
         }
 
         public void start()
         {
-            var playerPlaying = 0;
             board.displayBoard();
 
             while (true)
             {
                 Console.WriteLine("Its your turn player " + players[playerPlaying].getPlayerNumber() + ".");
                 Console.WriteLine("Your symbol is " + players[playerPlaying].getPlayerSymbol());
-
+                
                 while (true)
                 {
                     Console.WriteLine("Enter in the coordinates of your next move in the following format <row> <col>");
@@ -36,45 +37,19 @@ namespace TicTacToeApplication
                     {
                         var coordinates = userPlay.Split(' ').Select(int.Parse).ToList();
                         Console.WriteLine("Move accepted, here's the current board:");
-                        board.updateBoard(coordinates[0], coordinates[1], players[playerPlaying].getPlayerSymbol());
-                        board.displayBoard();
-                        var gameWon = board.checkForWin();
-
-                        if (gameWon == "X")
-                        {
-                            //Console.WriteLine(" ");
-                            Console.WriteLine("Player 0 has won the game");
-                            return;
-                        }
-
-                        if (gameWon == "O")
-                        {
-                            //Console.WriteLine(" ");
-                            Console.WriteLine("Player 1 has won the game");
-                            return;
-                        }
-
+                        updatePlayField(coordinates[0], coordinates[1]);
+                        checkIfGameWon(new WinCondition(players[playerPlaying], board));      
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Invalid move, please enter a valid move");
 
-                    }
-
+                    Console.WriteLine("Invalid move, please enter a valid move");
 
                 }
-
-                playerPlaying++;
-
-                if (playerPlaying >= players.Count)
-                {
-                    playerPlaying = 0;
-                }
+                nextPlayer();            
             }
         }
 
-        public void setPlayers(int numberOfPlayers)
+        public void initalizePlayers(int numberOfPlayers)
         {
             for (var i = 0; i < numberOfPlayers; i++)
             {
@@ -93,14 +68,14 @@ namespace TicTacToeApplication
             try
             {
                 var coordinates = userPlay.Split(' ').Select(int.Parse).ToList();
-                var match = Regex.Match(userPlay, @"^[0-2] [0-2]$");
+                var match = Regex.Match(userPlay, @"^[1-3] [1-3]$");
 
                 if (!match.Success)
                 {
                     return false;
                 }
 
-                else if (board.getBoardElement(coordinates[0], coordinates[1]).Trim() != ".")
+                else if (board.getBoardElement(coordinates[0] - 1, coordinates[1] - 1) != ".")
                 {
                     Console.WriteLine("Those coordinates have already been selected");
                     return false;
@@ -116,8 +91,37 @@ namespace TicTacToeApplication
             {
                 return false;
             }
+        }
 
 
+        public void nextPlayer()
+        {
+            playerPlaying++;
+
+            if (playerPlaying >= players.Count)
+            {
+                playerPlaying = 0;
+            }
+        }
+        
+        public static int calculateGameValues(string symbol)
+        {
+            return gameValues[symbol];
+        }
+
+        public void updatePlayField(int i,int j)
+        {
+            board.updateBoard(i,j, players[playerPlaying].getPlayerSymbol());
+            board.displayBoard();    
+        }
+
+        public void checkIfGameWon(WinCondition winCondition)
+        {
+            if (winCondition.hasPlayerWon())
+            {
+                Console.WriteLine("Player " + players[playerPlaying].getPlayerNumber() + " has won the game!");
+                Environment.Exit(1);
+            }    
         }
     }
 }
