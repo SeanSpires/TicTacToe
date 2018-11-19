@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TicTacToeApplication
 {
@@ -7,25 +8,40 @@ namespace TicTacToeApplication
         private string symbol;
         private int playerNumber;
 
-        public void setPlayerNumber(int playerNumber)
+        public Player(int playerNumber)
         {
-            this.playerNumber = playerNumber;
+            SetPlayerNumber(playerNumber);
+            SetPlayerSymbol(playerNumber);
         }
 
-        public void setPlayerSymbol(int playerNumber)
+
+        private void SetPlayerNumber(int playerNumber)
         {
-            this.symbol = playerNumber % 2 == 0 ? "X" : "O";
+            this.playerNumber = playerNumber + 1;
         }
 
-        public int getPlayerNumber()
+        private void SetPlayerSymbol(int playerNumber)
         {
-            return this.playerNumber;
+            symbol = playerNumber % 2 == 0 ? "X" : "O";
+        }
+
+        public int GetPlayerNumber()
+        {
+            return playerNumber;
             
         }
 
-        public string getPlayerSymbol()
+        public string GetPlayerSymbol()
         {
-            return this.symbol;
+            return symbol;
+        }
+
+        public void MakeMove(Game game, string userPlay)
+        {
+            var coordinates = userPlay.Split(',').Select(int.Parse).ToList();
+            Console.WriteLine("Move accepted, here's the current board:");                
+            game.UpdatePlayField(coordinates[0], coordinates[1]);
+            
         }
     }
 }

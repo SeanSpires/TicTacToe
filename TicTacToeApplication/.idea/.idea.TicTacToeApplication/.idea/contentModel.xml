@@ -7,6 +7,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Board.cs" t="Include" />
         <e p="Game.cs" t="Include" />
+        <e p="IBoard.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="Player.cs" t="Include" />
         <e p="Program.cs" t="Include" />
@@ -19,6 +20,17 @@
         <e p="WinCondition.cs" t="Include" />
       </e>
       <e p="TicTacToeApplication.sln" t="IncludeFlat" />
+      <e p="TicTacToeUnitTest" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="mockBoard.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="TicTacToeUnitTest.csproj" t="IncludeRecursive" />
+        <e p="ValidatorShould.cs" t="Include" />
+        <e p="WinConditionShould.cs" t="Include" />
+      </e>
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_TicTacToeApplication.-1234053290.00" t="ExcludeRecursive" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TicTacToeApplication
 {
-    public class Board
+    public class Board : IBoard
     {
         private static int BOARD_WIDTH;
         private static int BOARD_HEIGHT;
@@ -12,55 +12,68 @@ namespace TicTacToeApplication
         
         public Board(int size)
         {
-           BOARD_WIDTH = size;
-           BOARD_HEIGHT = size;
+           SetGridSize(size);
            playField = new string[BOARD_WIDTH ,BOARD_HEIGHT];
-           setUpBoard();
+           SetUpBoard();
 
         }
 
-        public void setUpBoard()
+        private void SetUpBoard()
         {
-            for (int row = 1; row <= BOARD_WIDTH; row++)
+            for (var row = 1; row <= BOARD_WIDTH; row++)
             {
                 for (int col = 1; col <= BOARD_HEIGHT; col++)
                 {
-                    updateBoard(row, col, ".");
+                    UpdateBoard(row, col, ".");
                 }
             }
            
         }
 
-        public void updateBoard(int row,int col,string symbol)
+        public void UpdateBoard(int row,int col,string symbol)
         {
             playField[row - 1, col - 1] = symbol;
         }
 
 
 
-        public string getBoardElement(int row, int col)
+        public string GetBoardElement(int row, int col)
         {
-            return this.playField[row,col];
+            return playField[row,col];
         }
 
-        public string[,] getPlayField()
+        public string[,] GetPlayField()
         {
             return playField;
         }
 
-        public static int getBoardHeight()
+        public int GetBoardHeight()
         {
             return BOARD_HEIGHT;
         }
 
-        public static int getBoardWidth()
+        public int GetBoardWidth()
         {
             return BOARD_WIDTH;
         }
 
-        public static string getEmptySymbol()
+        public string GetEmptySymbol()
         {
             return EMPTY_SYMBOL;
+        }
+
+        private void SetGridSize(int size)
+        {
+            if (size < 2)
+            {
+                BOARD_WIDTH = 1;
+                BOARD_HEIGHT = 1;
+            }
+            else
+            {
+                BOARD_WIDTH = size;
+                BOARD_HEIGHT = size;          
+            }
         }
 
     }

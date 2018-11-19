@@ -7,12 +7,42 @@ namespace TicTacToeApplication
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("How many players will be playing? ");
-            var numberOfPlayers = Console.ReadLine();
-            Console.WriteLine("what grid size do you want to play with");
-            var gridSize = Console.ReadLine();
-            Game game = new Game(int.Parse(numberOfPlayers),int.Parse(gridSize));
-            game.start();
+            var gridSize = 1;
+            var numberOfPlayers = 1;
+            var inputIsValid = false;
+            
+            while (!inputIsValid)
+            {
+                Console.WriteLine("How many players will be playing?");
+                var userInput = Console.ReadLine();
+                
+                if (Validator.ValidateNumberOfPlayers(userInput))
+                {
+                    inputIsValid = true;
+                    numberOfPlayers = int.Parse(userInput);
+                }
+                else
+                {
+                    Render.DisplayNumberOfPlayersError();
+                }
+            }
+
+            inputIsValid = false;
+            
+            while (!inputIsValid)
+            {
+                Console.WriteLine("what grid size do you want?");
+                var userInput = Console.ReadLine();
+                if (int.TryParse(userInput, out var output))
+                {
+                    gridSize = output;
+                    inputIsValid = true;
+                }
+            }
+
+
+            Game game = new Game(numberOfPlayers,gridSize);
+            game.Start();
         }
     }
 }
