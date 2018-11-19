@@ -19,5 +19,12 @@ namespace TicTacToeUnitTest
             Assert.True(result);
             
         }
+
+        [Theory]
+        [InlineData("")]
+        public void JudgeCorrectFails(string userInput)
+        {
+                
+        }
     }
 }

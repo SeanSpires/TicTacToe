@@ -24,12 +24,12 @@ namespace TicTacToeApplication
 
         private bool CheckRowForWin()
         {
-            return SumOverArray(board.GetBoardWidth(), board.GetBoardHeight());
+            return SumOverArray(board.GetBoardWidth(), board.GetBoardHeight(),true);
         }
 
         private bool CheckColForWin()
         {
-            return SumOverArray(board.GetBoardHeight(), board.GetBoardWidth());
+            return SumOverArray(board.GetBoardHeight(), board.GetBoardWidth(),false);
         }
 
         private bool CheckDiagonalForWin()
@@ -69,14 +69,21 @@ namespace TicTacToeApplication
             return true;
         }
 
-        private bool SumOverArray(int rows, int columns,)
+        private bool SumOverArray(int rows, int columns,bool isCheckingRowForWin)
         {
             for (var row = 0; row < rows; row++)
             {
                 var sum = 0;
                 for (var col = 0; col < columns; col++)
                 {
-                    sum += Game.CalculateGameValues(playField[row, col]);
+                    if (isCheckingRowForWin)
+                    {
+                        sum += Game.CalculateGameValues(playField[row, col]);
+                    }
+                    else
+                    {
+                        sum += Game.CalculateGameValues(playField[col, row]);
+                    }
                 }
 
                 if (sum == targetSum)
@@ -87,5 +94,6 @@ namespace TicTacToeApplication
 
             return false;
         }
+
     }
 }
