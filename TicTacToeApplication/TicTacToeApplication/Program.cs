@@ -41,7 +41,7 @@ namespace TicTacToeApplication
             }
 
 
-            Game game = new Game(numberOfPlayers,gridSize);
+            var game = new Game(numberOfPlayers,gridSize);
             game.Start();
         }
     }

@@ -100,6 +100,14 @@ namespace TicTacToeUnitTest
                         {"X",".","."}
                     };                  
                     break;
+                case "NonWin3":
+                    playField =  new string[,]
+                    {
+                        {"X",".","X"},
+                        {".",".","."},
+                        {".","X","."}
+                    };   
+                    break;
                 default:
                     playField = new string[,]
                     {

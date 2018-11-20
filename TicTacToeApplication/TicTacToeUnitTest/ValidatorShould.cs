@@ -25,7 +25,7 @@ namespace TicTacToeUnitTest
         [InlineData("0,0")]
         [InlineData("4,4")]
         [InlineData("-1,-1")]
-        public void FailInvalaidMoves(string userInput)
+        public void FailInvalidMoves(string userInput)
         {
             Board board = new Board(3);
             board.UpdateBoard(1,1,"X");

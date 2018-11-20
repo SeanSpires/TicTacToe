@@ -2,7 +2,7 @@ using System;
 
 namespace TicTacToeApplication
 {
-    public class Render
+    public class Render : IRender
     {
         public static void DisplayBoard(IBoard board)
         {
@@ -18,6 +18,21 @@ namespace TicTacToeApplication
                 }
             }
             Console.Write("\n");
+        }
+
+        void IRender.DisplayNumberOfPlayersError()
+        {
+            DisplayNumberOfPlayersError();
+        }
+
+        void IRender.DisplayStartTurn(Player player)
+        {
+            DisplayStartTurn(player);
+        }
+
+        void IRender.DisplayBoard(IBoard board)
+        {
+            DisplayBoard(board);
         }
 
         public static void DisplayNumberOfPlayersError()

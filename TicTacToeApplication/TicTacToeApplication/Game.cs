@@ -14,7 +14,8 @@ namespace TicTacToeApplication
         private int playerNumber;
         private Player playerPlaying;
         private bool gameIsFinished;
-        private static Dictionary<string,int>  gameValues = new Dictionary<string, int> {{"X", 1}, {"O", -1}, {".", 0}};
+        private static readonly Dictionary<string,int>  gameValues = new Dictionary<string, int> {{"X", 1}, {"O", -1}
+            , {".", 0}};
         
         public Game(int numberOfPlayers,int gridSize)
         {
